@@ -1,20 +1,20 @@
 {
     "client": "Thunder Client",
     "collectionName": "Boo",
-    "dateExported": "2024-01-22T13:29:26.830Z",
+    "dateExported": "2024-01-23T10:26:28.030Z",
     "version": "1.1",
     "folders": [],
     "requests": [
         {
-            "_id": "7c7cfbc0-4f5b-4c93-9495-68f8b65a6d07",
-            "colId": "f5f434e8-9255-4973-8690-9fff99fedb06",
+            "_id": "430c9f4d-73d3-49fa-8ad5-4086e0949c03",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
             "containerId": "",
             "name": "CreateProfile",
-            "url": "http://localhost:3000/profile",
+            "url": "http://localhost:3000/profiles",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2024-01-22T13:22:23.401Z",
-            "modified": "2024-01-22T13:27:52.213Z",
+            "created": "2024-01-23T10:23:47.051Z",
+            "modified": "2024-01-23T10:23:47.051Z",
             "headers": [],
             "params": [],
             "body": {
@@ -22,6 +22,207 @@
                 "raw": "{\n  \"name\": \"Profile Tester\",\n  \"description\": \"This is to test create profile\",\n  \"mbti\": \"ISFJ\",\n  \"enneagram\": \"5w6\",\n  \"variant\": \"so/sp\",\n  \"tritype\": 513,\n  \"socionics\": \"ILE\",\n  \"sloan\": \"RCOEI\",\n  \"psyche\": \"VLFE\"\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "8aa78291-3d9b-4733-8dde-b268e544489c",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAllProfiles",
+            "url": "http://localhost:3000/profiles",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-23T10:23:47.052Z",
+            "modified": "2024-01-23T10:23:47.052Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "01f5a6c6-646d-44dc-bb3c-c7f6872943be",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAProfile",
+            "url": "http://localhost:3000/profiles/1",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-01-23T10:23:47.053Z",
+            "modified": "2024-01-23T10:24:28.784Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3b2d4e25-c540-45d8-9e29-4419b17bed75",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "CreateUser",
+            "url": "http://localhost:3000/users",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-01-23T10:23:47.054Z",
+            "modified": "2024-01-23T10:23:47.054Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Profile Tester\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f3d231c2-d40b-4052-9cc5-8bb388a5b0ff",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAllUsers",
+            "url": "http://localhost:3000/users",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-01-23T10:23:47.055Z",
+            "modified": "2024-01-23T10:23:47.055Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1fabb61c-6705-42d3-9acc-0e368a8b1d2e",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAUser",
+            "url": "http://localhost:3000/users/1",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-01-23T10:23:47.056Z",
+            "modified": "2024-01-23T10:23:47.056Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "28cf3de3-9c2f-4349-ac3d-80215e5bf1bb",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "CreateCommentForUser",
+            "url": "http://localhost:3000/users/1/comments",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-01-23T10:23:47.057Z",
+            "modified": "2024-01-23T10:23:47.057Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Test Comment\",\n  \"description\": \"This is the test comment for user\",\n  \"vote\": {\n    \"mbti\": \"INFT\",\n    \"enneagram\": \"2w3\",\n    \"zodiac\": \"Cancer\"\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "467fddff-488a-4231-9e3a-337cc8ba0ab1",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAllCommentsForUser",
+            "url": "http://localhost:3000/users/1/comments",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-01-23T10:23:47.058Z",
+            "modified": "2024-01-23T10:23:47.058Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b6559d44-4d41-4bb8-9926-61dab58d3f89",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAllCommentsForUserWithFilter",
+            "url": "http://localhost:3000/users/1/comments?filterBy=mbti",
+            "method": "GET",
+            "sortNum": 85000,
+            "created": "2024-01-23T10:23:47.059Z",
+            "modified": "2024-01-23T10:23:47.059Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "filterBy",
+                    "value": "mbti",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "2ec17674-ffe1-475a-817e-2649509ec700",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAllCommentsForUserWithSort",
+            "url": "http://localhost:3000/users/1/comments?sortBy=best",
+            "method": "GET",
+            "sortNum": 87500,
+            "created": "2024-01-23T10:23:47.061Z",
+            "modified": "2024-01-23T10:23:47.061Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "sortBy",
+                    "value": "best",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "b9c352c4-7802-47d7-bd91-bd362adf71fb",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "GetAllCommentsForUserWithFilterAndSort",
+            "url": "http://localhost:3000/users/1/comments?filterBy=mbti&sortBy=best",
+            "method": "GET",
+            "sortNum": 88750,
+            "created": "2024-01-23T10:23:47.063Z",
+            "modified": "2024-01-23T10:23:47.063Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "filterBy",
+                    "value": "mbti",
+                    "isPath": false
+                },
+                {
+                    "name": "sortBy",
+                    "value": "best",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "15b84654-aca7-4ab5-80cf-e719e43837ef",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "LikeComment",
+            "url": "http://localhost:3000/comments/1/like",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-01-23T10:23:47.060Z",
+            "modified": "2024-01-23T10:23:47.060Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "644d2fdf-b930-43e2-8bef-9624b2e87b00",
+            "colId": "831e30a5-2950-4953-bed1-1628e3ff1279",
+            "containerId": "",
+            "name": "UnlikeComment",
+            "url": "http://localhost:3000/comments/1/unlike",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-01-23T10:23:47.062Z",
+            "modified": "2024-01-23T10:23:47.062Z",
+            "headers": [],
+            "params": [],
             "tests": []
         }
     ]
