@@ -1,4 +1,4 @@
-import { profileAvatar, profileTemplate, demoProfile } from '../constants.js';
+import { profileAvatar, profileTemplate, demoProfile } from "../constants.js";
 import { createProfile, getAllProfiles, getProfileById } from "../database/profile.db.js";
 
 async function createProfileHandler(req, res) {
@@ -15,7 +15,7 @@ async function createProfileHandler(req, res) {
     } = req.body;
 
     if (!name) {
-        return res.status(400).send('Name of profile is required');
+        return res.status(400).send("Name of profile is required");
     }
 
     try {
@@ -32,7 +32,7 @@ async function createProfileHandler(req, res) {
             image: profileAvatar,
         };
         const createdProfile = await createProfile(profile);
-        return res.status(201).json({ message: 'New Profile created successfully', profile: createdProfile });
+        return res.status(201).json({ message: "New Profile created successfully", profileId: createdProfile });
     } catch (error) {
         console.log(error);
         res.status(500).send(error);
@@ -51,9 +51,7 @@ async function getAllProfilesHandler(req, res) {
 
 async function getProfileHandler(req, res) {
     try {
-        const id = parseInt(req.params.id);
-        const profile = await getProfileById(id);
-        console.log('Profile', profile)
+        const profile = await getProfileById(req.params.id);
         if (!profile) {
             return res.status(404).send(`Profile for Id ${id} not found`);
         }

@@ -1,10 +1,13 @@
+import ShortUUID from "short-uuid";
 import { getCollections } from "./connect.js";
+
+const { generate } = ShortUUID;
 
 async function createProfile(profile) {
     const { profileCollection } = await getCollections();
-    const count = await profileCollection.countDocuments();
-    const id = count + 1;
-    return profileCollection.insertOne({ id, ...profile });
+    const id = generate();
+    profileCollection.insertOne({ ...profile, id });
+    return id;
 }
 
 async function getAllProfiles() {
