@@ -15,25 +15,38 @@ export async function createComment(data) {
         createdAt: Date.now(),
     };
 
-    commentCollection.insertOne(comment);
+    await commentCollection.insertOne(comment);
     return id;
 }
 
 export async function getCommentById(id) {
     const { commentCollection } = await getCollections();
-    return commentCollection.findOne({ id });
+    try {
+        const comment = await commentCollection.findOne({ id });
+        return comment;
+    } catch (error) {
+        return null;
+    }
 }
 
 export async function likeComment(id) {
     const { commentCollection } = await getCollections();
-    const comment = await commentCollection.findOne({ id })
-    return commentCollection.replaceOne({ id }, { ...comment, likes: comment.likes + 1 });
+    try {
+        const comment = await commentCollection.findOne({ id });
+        return commentCollection.replaceOne({ id }, { ...comment, likes: comment.likes + 1 });
+    } catch (error) {
+        return null;
+    }
 }
 
 export async function unLikeComment(id) {
     const { commentCollection } = await getCollections();
-    const comment = await commentCollection.findOne({ id })
-    return commentCollection.replaceOne({ id }, { ...comment, likes: comment.likes - 1 });
+    try {
+        const comment = await commentCollection.findOne({ id });
+        return commentCollection.replaceOne({ id }, { ...comment, likes: comment.likes - 1 });
+    } catch (error) {
+        return null;
+    }
 }
 
 export async function getAllCommentsForUser(userId) {

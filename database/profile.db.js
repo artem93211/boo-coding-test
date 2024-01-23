@@ -6,7 +6,7 @@ const { generate } = ShortUUID;
 async function createProfile(profile) {
     const { profileCollection } = await getCollections();
     const id = generate();
-    profileCollection.insertOne({ ...profile, id });
+    await profileCollection.insertOne({ ...profile, id });
     return id;
 }
 
@@ -18,11 +18,12 @@ async function getAllProfiles() {
 
 async function getProfileById(id) {
     const { profileCollection } = await getCollections();
-    return profileCollection.findOne({ id });
+    try {
+        const profile = await profileCollection.findOne({ id });
+        return profile;
+    } catch (error) {
+        return null;
+    }
 }
 
-export {
-    createProfile,
-    getAllProfiles,
-    getProfileById,
-};
+export { createProfile, getAllProfiles, getProfileById };

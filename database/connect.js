@@ -1,18 +1,23 @@
 import { MongoClient } from "mongodb";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
-import { databaseName, collectionName, demoProfile, demoUser, demoComment } from "../constants.js";
+import {
+    databaseName,
+    collectionName,
+    demoProfile,
+    demoUser,
+    demoComment,
+} from "../constants.js";
 
-const mongod = new MongoMemoryServer();
+let mongod;
 
-async function connectDatabase(action) {
-    //  Start database if it's first time to connect
-    if (action === "init") {
-        await mongod.start();
-    }
+async function getMongoServer() {
+    mongod = await MongoMemoryServer.create();
+}
 
+async function connectDatabase() {
     // Connect database
-    const uri = await mongod.getUri();
+    const uri = mongod.getUri();
     const client = new MongoClient(uri);
     await client.connect();
     const db = client.db(databaseName);
@@ -24,27 +29,29 @@ async function connectDatabase(action) {
     const profileCount = await profileCollection.countDocuments();
     if (profileCount === 0) {
         await profileCollection.insertOne({
-            ...demoProfile
+            ...demoProfile,
         });
     }
     const userCount = await userCollection.countDocuments();
     if (userCount === 0) {
         await userCollection.insertOne({
-            ...demoUser
-        })
+            ...demoUser,
+        });
     }
     const commentCount = await commentCollection.countDocuments();
     if (commentCount === 0) {
         await commentCollection.insertOne({
-            ...demoComment
-        })
+            ...demoComment,
+        });
     }
     return { profileCollection, userCollection, commentCollection };
 }
 
 async function getCollections() {
-    return await connectDatabase("start");
+    if (!mongod) {
+        await getMongoServer();
+    }
+    return await connectDatabase();
 }
-
 
 export { getCollections, connectDatabase };

@@ -1,5 +1,9 @@
 import { profileAvatar, profileTemplate, demoProfile } from "../constants.js";
-import { createProfile, getAllProfiles, getProfileById } from "../database/profile.db.js";
+import {
+    createProfile,
+    getAllProfiles,
+    getProfileById,
+} from "../database/profile.db.js";
 
 async function createProfileHandler(req, res) {
     const {
@@ -15,7 +19,7 @@ async function createProfileHandler(req, res) {
     } = req.body;
 
     if (!name) {
-        return res.status(400).send("Name of profile is required");
+        return res.status(400).json({ message: "Name is required" });
     }
 
     try {
@@ -32,7 +36,10 @@ async function createProfileHandler(req, res) {
             image: profileAvatar,
         };
         const createdProfile = await createProfile(profile);
-        return res.status(201).json({ message: "New Profile created successfully", profileId: createdProfile });
+        return res.status(201).json({
+            message: "New Profile created successfully",
+            profileId: createdProfile,
+        });
     } catch (error) {
         console.log(error);
         res.status(500).send(error);
@@ -53,7 +60,9 @@ async function getProfileHandler(req, res) {
     try {
         const profile = await getProfileById(req.params.id);
         if (!profile) {
-            return res.status(404).send(`Profile for Id ${id} not found`);
+            return res
+                .status(404)
+                .json({ message: `Profile for Id ${req.params.id} not found` });
         }
         res.render(profileTemplate, { profile });
     } catch (error) {
@@ -62,8 +71,4 @@ async function getProfileHandler(req, res) {
     }
 }
 
-export {
-    createProfileHandler,
-    getAllProfilesHandler,
-    getProfileHandler,
-};
+export { createProfileHandler, getAllProfilesHandler, getProfileHandler };

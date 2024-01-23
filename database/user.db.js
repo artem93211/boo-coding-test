@@ -6,7 +6,7 @@ const { generate } = ShortUUID;
 export async function createUser(user) {
     const { userCollection } = await getCollections();
     const id = generate();
-    userCollection.insertOne({ ...user, id, createdAt: Date.now() });
+    await userCollection.insertOne({ ...user, id, createdAt: Date.now() });
     return id;
 }
 
@@ -17,5 +17,10 @@ export async function getAllUsers() {
 
 export async function getUserById(id) {
     const { userCollection } = await getCollections();
-    return userCollection.findOne({ id });
+    try {
+        const user = await userCollection.findOne({ id });
+        return user;
+    } catch (error) {
+        return null;
+    }
 }
